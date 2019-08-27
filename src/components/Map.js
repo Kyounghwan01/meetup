@@ -38,12 +38,12 @@ export default class Map extends Component {
                           <div class="img">
                               <img src="${list.hostImg}" width="73" height="70">
                          </div>
-                          <div class="desc">
+                          <div class="desc" >
                               <div class="ellipsis">${list.group.name}</div>
                               <div class="jibun ellipsis">날짜 : ${list.local_date} 시간 : ${list.local_time} </div>
                               <div class="jibun ellipsis">주최자 : ${list.hostName}</div>
                               <div class="jibun ellipsis">참여 확정 인원 : ${list.yes_rsvp_count}</div>
-                              <div class="jibun ellipsis"><a href="/admin" target="_self" class="link">즐겨찾기추가</a></div>
+                              <div class="jibun ellipsis"><a href=${list.link} target="_blank" class="link">상세보기</a></div>
                           </div>
                       </div>
                   </div>
@@ -132,13 +132,15 @@ export default class Map extends Component {
           <span className="header-title">MeetUp Map!!</span>
           <NavLink
             to={{
-              pathname:"/favorites",
-              state:{
-                lists : this.props.meetupData
+              pathname: "/favorites",
+              state: {
+                lists: this.props.meetupData
               }
             }}
-          >즐겨찾기</NavLink>
-
+            className="go-to-favorites"
+          >
+            <span>즐겨찾기</span>
+          </NavLink>
         </div>
         <div className="App" ref={this.checkContainer} style={mapSize}></div>
       </div>
