@@ -7,8 +7,6 @@ const mapStateToProps = state => {
   state.meetupData = state.meetupData.filter(el => {
     return el.venue;
   });
-
-  console.log(state);
   if (state.hostData.length === state.meetupData.length) {
     state.meetupData.map((list, index) => {
       if (state.hostData[index].photo === undefined) {
