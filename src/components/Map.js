@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Favorites from "./Favorites";
+import { NavLink } from "react-router-dom";
 import "./Map.css";
 
 export default class Map extends Component {
@@ -14,6 +14,62 @@ export default class Map extends Component {
   componentDidMount() {
     this.getDataFunc(this.state.initLat, this.state.initLon);
     this.mapSetUp();
+  }
+
+  componentDidUpdate() {
+    const that = this;
+    this.mapOption = {
+      center: new window.kakao.maps.LatLng(
+        this.state.initLon,
+        this.state.initLat
+      ),
+      level: 7
+    };
+
+    if (this.props.meetupData.length > 8) {
+      var position = that.props.meetupData.map(list => {
+        return {
+          content: `
+                  <div class="info">
+                      <div class="title">
+                          <span class="marker-name">${list.name}</span>
+                      </div>
+                      <div class="body">
+                          <div class="img">
+                              <img src="${list.hostImg}" width="73" height="70">
+                         </div>
+                          <div class="desc">
+                              <div class="ellipsis">${list.group.name}</div>
+                              <div class="jibun ellipsis">날짜 : ${list.local_date} 시간 : ${list.local_time} </div>
+                              <div class="jibun ellipsis">주최자 : ${list.hostName}</div>
+                              <div class="jibun ellipsis">참여 확정 인원 : ${list.yes_rsvp_count}</div>
+                              <div class="jibun ellipsis"><a href="/admin" target="_self" class="link">즐겨찾기추가</a></div>
+                          </div>
+                      </div>
+                  </div>
+              `,
+          latlng: new window.kakao.maps.LatLng(list.venue.lat, list.venue.lon)
+        };
+      });
+
+      for (let i = 0; i < position.length; i++) {
+        var marker = new window.kakao.maps.Marker({
+          map: that.map,
+          position: position[i].latlng
+        });
+
+        var infowindow = new window.kakao.maps.InfoWindow({
+          content: position[i].content,
+          removable: true
+        });
+
+        window.kakao.maps.event.addListener(
+          marker,
+          "click",
+          that.makeMarkerClickListener(that.map, marker, infowindow)
+        );
+      }
+    }
   }
 
   mapSetUp = () => {
@@ -51,89 +107,40 @@ export default class Map extends Component {
   getDataFunc = async (initLat, initLon) => {
     await this.props.onNewLoad(initLat, initLon);
 
-    for (let i = 0; i < this.props.meetupData.length; i++) {
-      this.props.hostInfoLoad(
-        this.props.meetupData[i].id,
-        this.props.meetupData[i].group.urlname
-      );
-    }
+    // for (let i = 0; i < this.props.meetupData.length; i++) {
+    //   this.props.hostInfoLoad(
+    //     this.props.meetupData[i].id,
+    //     this.props.meetupData[i].group.urlname
+    //   );
+    // }
   };
 
-  componentDidUpdate() {
-    const that = this;
-    this.mapOption = {
-      center: new window.kakao.maps.LatLng(
-        this.state.initLon,
-        this.state.initLat
-      ),
-      level: 7
-    };
-
-    setTimeout(function() {
-      var position = that.props.meetupData.map(list => {
-        return {
-          content: `
-                <div class="info">
-                    <div class="title">
-                        <span class="marker-name">${list.name}</span>
-                    </div>
-                    <div class="body">
-                        <div class="img">
-                            <img src="${list.hostImg}" width="73" height="70">
-                       </div>
-                        <div class="desc">
-                            <div class="ellipsis">${list.group.name}</div>
-                            <div class="jibun ellipsis">날짜 : ${list.local_date} 시간 : ${list.local_time} </div>
-                            <div class="jibun ellipsis">주최자 : ${list.hostName}</div>
-                            <div class="jibun ellipsis">참여 확정 인원 : ${list.yes_rsvp_count}</div>
-                            <div class="desc-event">
-                              <div><a href=${list.link} target="_blank" class="link">상세보기</a></div>
-                              <div onclick="testFunc()">즐겨찾기 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-          latlng: new window.kakao.maps.LatLng(list.venue.lat, list.venue.lon)
-        };
-      });
-
-      for (let i = 0; i < position.length; i++) {
-        var marker = new window.kakao.maps.Marker({
-          map: that.map,
-          position: position[i].latlng
-        });
-
-        var infowindow = new window.kakao.maps.InfoWindow({
-          content: position[i].content,
-          removable: true
-        });
-
-        window.kakao.maps.event.addListener(
-          marker,
-          "click",
-          that.makeClickListener(that.map, marker, infowindow)
-        );
-      }
-    }, 500);
-  }
-
-  makeClickListener = (map, marker, infowindow) => {
+  makeMarkerClickListener = (map, marker, infowindow) => {
     return function() {
       infowindow.open(map, marker);
     };
   };
 
   render() {
-    const Mapstyle = {
+    const mapSize = {
       width: "100vw",
       height: "80vh"
     };
     return (
-      <div className="header">
-        <span className="header-title">header</span>
-        <div className="App" ref={this.checkContainer} style={Mapstyle}></div>
-        <Favorites data={this.props.meetupData}></Favorites>
+      <div className="container">
+        <div className="header">
+          <span className="header-title">MeetUp Map!!</span>
+          <NavLink
+            to={{
+              pathname:"/favorites",
+              state:{
+                lists : this.props.meetupData
+              }
+            }}
+          >즐겨찾기</NavLink>
+
+        </div>
+        <div className="App" ref={this.checkContainer} style={mapSize}></div>
       </div>
     );
   }
