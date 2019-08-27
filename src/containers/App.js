@@ -9,7 +9,7 @@ const mapStateToProps = state => {
   });
   if (state.hostData.length === state.meetupData.length) {
     state.meetupData.map((list, index) => {
-      if (state.hostData[index].photo === undefined) {
+      if (!state.hostData[index].photo) {
         return (state.hostData[index]["photo"] = {
           photo_link: "http://cfile181.uf.daum.net/image/250649365602043421936D"
         });
@@ -31,9 +31,13 @@ const mapDispatchToProps = dispatch => {
       return new Promise((resolve, reject) => {
         getNewData(lat, lon)
           .then(res => {
+            console.log(res);
             dispatch(initalMeetupData(res));
           })
-          .then(data => resolve(data));
+          .then(data => resolve(data))
+          .catch(function(err){
+            reject(err);
+          });
       });
     },
     hostInfoLoad: (id, url) => {
@@ -42,7 +46,10 @@ const mapDispatchToProps = dispatch => {
           .then(res => {
             dispatch(getHostData(res));
           })
-          .then(data => resolve(data));
+          .then(data => resolve(data))
+          .catch(function(err){
+            reject(err);
+          });
       });
     }
   };

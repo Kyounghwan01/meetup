@@ -107,12 +107,12 @@ export default class Map extends Component {
   getDataFunc = async (initLat, initLon) => {
     await this.props.onNewLoad(initLat, initLon);
 
-    // for (let i = 0; i < this.props.meetupData.length; i++) {
-    //   this.props.hostInfoLoad(
-    //     this.props.meetupData[i].id,
-    //     this.props.meetupData[i].group.urlname
-    //   );
-    // }
+    for (let i = 0; i < this.props.meetupData.length; i++) {
+      await this.props.hostInfoLoad(
+        this.props.meetupData[i].id,
+        this.props.meetupData[i].group.urlname
+      );
+    }
   };
 
   makeMarkerClickListener = (map, marker, infowindow) => {
@@ -123,13 +123,18 @@ export default class Map extends Component {
 
   render() {
     const mapSize = {
-      width: "100vw",
-      height: "80vh"
+      width: "95vw",
+      height: "80vh",
+      margin: "30px",
+      borderRadius: "10px"
     };
     return (
       <div className="container">
         <div className="header">
-          <span className="header-title">MeetUp Map!!</span>
+          <img
+            className="logo"
+            src="https://secure.meetupstatic.com/s/img/5455565085016210254/logo/svg/logo--script.svg"
+          ></img>
           <NavLink
             to={{
               pathname: "/favorites",
@@ -143,6 +148,9 @@ export default class Map extends Component {
           </NavLink>
         </div>
         <div className="App" ref={this.checkContainer} style={mapSize}></div>
+        <div className="footer">
+          <span>바닐라코딩 front-end test</span>
+        </div>
       </div>
     );
   }
