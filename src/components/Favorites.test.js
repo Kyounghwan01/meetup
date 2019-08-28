@@ -20,7 +20,6 @@ describe("<Favorites/>", () => {
             created: 1562906156000,
             id: 2,
             duration: 7200000,
-            id: "bcwvdryzlbpc",
             name: "Code + Network"
           }
         ]
@@ -28,19 +27,16 @@ describe("<Favorites/>", () => {
     }
   };
 
-  it("should have element", () => {
-    const component = shallow(
-      <Favorites
-        location={actions.location}
-        chats={actions.chats}
-        newMessenger={actions.newMessenger}
-      />
-    );
+  const component = shallow(<Favorites location={actions.location} />);
 
+  it("should have element", () => {
     expect(component.exists("span")).toEqual(true);
     expect(component.exists("div")).toEqual(true);
     expect(component.exists("img")).toEqual(true);
+    expect(component.exists("a")).toEqual(true);
+  });
 
+  it("should return title", () => {
     const wapperTitle = component
       .find(".favorites-title")
       .map(node => node.text());

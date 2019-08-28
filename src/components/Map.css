@@ -3,46 +3,46 @@
   width: 100px;
   margin-left: 30px;
 }
-.App {
-  position: "absolute";
-  top: 40;
-  bottom: 0;
-  width: "100vw";
-  height: "80vh";
-}
 .container {
   height: 100vh;
   background: rgb(242, 242, 242);
 }
 .header {
-  height: 60px;
+  height: 8%;
   display: flex;
   justify-content: space-between;
   text-align: center;
   background-color: white;
 }
-
 .footer {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 98%;
+  background-color: rgb(16, 23, 32);
+  height: 5%;
+  padding-right: 30px;
+  justify-content: flex-end;
+}
+.favorites-footer {
+  display: flex;
+  align-items: center;
+  width: 98%;
   background-color: rgb(16, 23, 32);
   height: 40px;
-  padding-left: 30px;
+  padding-right: 30px;
+  justify-content: flex-end;
 }
-
-.footer span {
+.footer span,
+.favorites-footer span {
   color: white;
   font-weight: bold;
 }
-
 .marker-name {
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .wrap {
   position: absolute;
   left: 0;
@@ -127,7 +127,6 @@
   font-size: 12px;
   text-decoration: none;
 }
-
 .favorites-container {
   height: 100%;
   background: rgb(242, 242, 242);
@@ -137,7 +136,7 @@ h3 {
   text-align: center;
 }
 .favorites-unadd {
-  margin : 0 20px 5% 5%;
+  margin: 0 20px 35px 5%;
   width: 40%;
   height: 100%;
   float: left;
@@ -193,7 +192,7 @@ h3 {
   background-color: white;
 }
 .favorites-btn {
-  border: 1px solid rgb(64,148,166);
+  border: 1px solid rgb(64, 148, 166);
   width: 50px;
   height: 30px;
   line-height: 30px;
@@ -216,20 +215,24 @@ h3 {
 }
 .favorites-btn span {
   font-size: 20px;
-  color: rgb(64,148,166);
+  color: rgb(64, 148, 166);
 }
-
 .favorites-desc p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 450px;
+  margin-left: 10px;
 }
-.favorites-title{
+.favorites-title {
   font-size: 18px;
   font-weight: bold;
 }
-.favorites-sub{
-  color: rgb(64,148,166);
+.favorites-sub {
+  color: rgb(64, 148, 166);
   font-weight: bold;
+}
+.favorites-sub a {
+  text-decoration: none;
+  color: rgb(64, 148, 166);
 }

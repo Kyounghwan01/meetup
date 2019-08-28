@@ -28,6 +28,11 @@ export default class Favorites extends Component {
             <p className="favorites-sub">
               {list.local_date} , {list.local_time}
             </p>
+            <p className="favorites-sub">
+              <a href={list.link} target="_blank" rel="noopener noreferrer">
+                상세정보
+              </a>
+            </p>
           </div>
           <div
             className="favorites-btn"
@@ -57,6 +62,11 @@ export default class Favorites extends Component {
               <p className="favorites-sub">
                 {list.local_date} , {list.local_time}
               </p>
+              <p className="favorites-sub">
+                <a href={list.link} target="_blank" rel="noopener noreferrer">
+                  상세정보
+                </a>
+              </p>
             </div>
             <div
               className="favorites-btn"
@@ -77,7 +87,6 @@ export default class Favorites extends Component {
                 this.setState({
                   favoriteData: newArray
                 });
-                e.currentTarget.style = "display : none";
               }}
             >
               <span>추가</span>
@@ -89,11 +98,17 @@ export default class Favorites extends Component {
     return (
       <div className="favorites-container">
         <div className="header">
-          <img
-            alt="logo"
-            className="logo"
-            src="https://secure.meetupstatic.com/s/img/5455565085016210254/logo/svg/logo--script.svg"
-          ></img>
+          <NavLink
+            to={{
+              pathname: "/"
+            }}
+          >
+            <img
+              alt="logo"
+              className="logo"
+              src="https://secure.meetupstatic.com/s/img/5455565085016210254/logo/svg/logo--script.svg"
+            ></img>
+          </NavLink>
           <NavLink
             to={{
               pathname: "/"
@@ -110,7 +125,7 @@ export default class Favorites extends Component {
         <div className="favorites-add">
           <div>{addList}</div>
         </div>
-        <div className="footer">
+        <div className="favorites-footer">
           <span>바닐라코딩 front-end test</span>
         </div>
       </div>

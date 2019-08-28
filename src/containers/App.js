@@ -31,7 +31,6 @@ const mapDispatchToProps = dispatch => {
       return new Promise((resolve, reject) => {
         getNewData(lat, lon)
           .then(res => {
-            console.log(res);
             dispatch(initalMeetupData(res));
           })
           .then(data => resolve(data))

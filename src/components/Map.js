@@ -25,8 +25,8 @@ export default class Map extends Component {
       ),
       level: 7
     };
-
-    if (this.props.meetupData.length > 8) {
+    console.log(this.props.meetupData);
+    if (this.props.meetupData.length > 1) {
       var position = that.props.meetupData.map(list => {
         return {
           content: `
@@ -36,7 +36,7 @@ export default class Map extends Component {
                       </div>
                       <div class="body">
                           <div class="img">
-                              <img src="${list.hostImg}" width="73" height="70">
+                              <img src=${list.hostImg ? list.hostImg : "http://cfile181.uf.daum.net/image/250649365602043421936D"} width="73" height="70">
                          </div>
                           <div class="desc" >
                               <div class="ellipsis">${list.group.name}</div>
@@ -108,7 +108,7 @@ export default class Map extends Component {
     await this.props.onNewLoad(initLat, initLon);
 
     for (let i = 0; i < this.props.meetupData.length; i++) {
-        this.props.hostInfoLoad(
+      this.props.hostInfoLoad(
         this.props.meetupData[i].id,
         this.props.meetupData[i].group.urlname
       );
@@ -123,9 +123,9 @@ export default class Map extends Component {
 
   render() {
     const mapSize = {
-      width: "95vw",
+      width: "96vw",
       height: "80vh",
-      margin: "30px",
+      margin: "2%",
       borderRadius: "10px"
     };
     return (
