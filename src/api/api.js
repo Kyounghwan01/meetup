@@ -5,7 +5,7 @@ function getNewData(lat, lon) {
     axios({
       method: "get",
       headers: {
-        Authorization: "bearer ca476b90eb117bd560592e9c26967145"
+        Authorization: "bearer b52d4dc00d0b201c256b3abd9aa046bc"
       },
       url: `https://cors-anywhere.herokuapp.com/api.meetup.com/find/upcoming_events?&sign=true&photo-host=public&lon=${lat}&page=10&lat=${lon}`
     })
@@ -21,7 +21,7 @@ function getHostInfoData(eventId, url) {
     axios({
       method: "get",
       headers: {
-        Authorization: "bearer ca476b90eb117bd560592e9c26967145"
+        Authorization: "bearer b52d4dc00d0b201c256b3abd9aa046bc"
       },
       url: `https://cors-anywhere.herokuapp.com/api.meetup.com/${url}/events/${eventId}/hosts?&sign=true&photo-host=public`
     })

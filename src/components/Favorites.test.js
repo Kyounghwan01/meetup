@@ -1,20 +1,20 @@
 import React from "react";
-import { shallow, configure } from "enzyme";
-import Map from "./Map";
+import { shallow,mount, configure } from "enzyme";
+import Favorites from "./Favorites";
 import Adapter from "enzyme-adapter-react-16";
 
 configure({ adapter: new Adapter() });
 
-describe("<Map/>", () => {
+describe("<Favorites/>", () => {
   const actions = {
-    window : {
-      kakao : {
-        maps: {
-          LatLng : jest.fn(),
-          Map : jest.fn(),
-          MapTypeControl : jest.fn()
-        }
-      }
+    location : {
+      state : {
+        lists : [
+          {created: 1546950493000,
+            date_in_series_pattern: false
+          }
+        ]
+      },
     },
     newMessenger: jest.fn(),
     chats: [
@@ -38,8 +38,8 @@ describe("<Map/>", () => {
 
   it("should have element", () => {
     const component = shallow(
-      <Map
-      window={actions.window}
+      <Favorites
+        location={actions.location}
         chats={actions.chats}
         newMessenger={actions.newMessenger}
       />

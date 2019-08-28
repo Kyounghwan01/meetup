@@ -132,6 +132,7 @@ export default class Map extends Component {
       <div className="container">
         <div className="header">
           <img
+            alt="logo"
             className="logo"
             src="https://secure.meetupstatic.com/s/img/5455565085016210254/logo/svg/logo--script.svg"
           ></img>
