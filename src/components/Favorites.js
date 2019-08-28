@@ -25,8 +25,8 @@ export default class Favorites extends Component {
         <div className="favorites-block" key={list.id} data-id={list.id}>
           <div className="favorites-desc">
             <p className="favorites-title">{list.name}</p>
-            <p>
-              {list.local_date} / {list.local_time}
+            <p className="favorites-sub">
+              {list.local_date} , {list.local_time}
             </p>
           </div>
           <div
@@ -54,8 +54,8 @@ export default class Favorites extends Component {
           <div className="favorites-block" key={list.id} data-id={index}>
             <div className="favorites-desc">
               <p className="favorites-title">{list.name}</p>
-              <p>
-                {list.local_date} / {list.local_time}
+              <p className="favorites-sub">
+                {list.local_date} , {list.local_time}
               </p>
             </div>
             <div
@@ -66,16 +66,18 @@ export default class Favorites extends Component {
                   this.props.location.state.lists[index].id,
                   JSON.stringify(this.props.location.state.lists[index])
                 );
-                this.setState({
-                  favoriteData: (this.state.favoriteData = this.state.favoriteData.concat(
+                let newArray = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                  newArray.push(
                     JSON.parse(
-                      localStorage.getItem(
-                        Object.keys(localStorage)[localStorage.length - 1]
-                      )
+                      localStorage.getItem(Object.keys(localStorage)[i])
                     )
-                  ))
+                  );
+                }
+                this.setState({
+                  favoriteData: newArray
                 });
-                e.currentTarget.style = "display : none"
+                e.currentTarget.style = "display : none";
               }}
             >
               <span>추가</span>

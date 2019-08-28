@@ -1,3 +1,2 @@
-export const INITALIZEMAP = "INITALIZEMAP";
 export const INITAL_MEETUP_DATA = "INITAL_MEETUP_DATA";
 export const GET_HOST_DATA = "GET_HOST_DATA";

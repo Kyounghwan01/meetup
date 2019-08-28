@@ -108,7 +108,7 @@ export default class Map extends Component {
     await this.props.onNewLoad(initLat, initLon);
 
     for (let i = 0; i < this.props.meetupData.length; i++) {
-      await this.props.hostInfoLoad(
+        this.props.hostInfoLoad(
         this.props.meetupData[i].id,
         this.props.meetupData[i].group.urlname
       );

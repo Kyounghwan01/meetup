@@ -223,9 +223,13 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 300px;
-  color: black;
+  width: 450px;
 }
 .favorites-title{
+  font-size: 18px;
+  font-weight: bold;
+}
+.favorites-sub{
+  color: rgb(64,148,166);
   font-weight: bold;
 }
