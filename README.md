@@ -1,3 +1,5 @@
+**meetup API를 이용한 웹페이지 만들기, backend의 서버는 CORS에러를 해결하기 위해 프록시 서버로 활용하였습니다.**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
